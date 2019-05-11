@@ -24,4 +24,70 @@ ii- Calculate some statistics about the gvcf file
 conda install -c bioconda rtg-tools
 rtg vcfstats SRR8115017.gvcf.gz > stats.txt
 
+#In the pipeline we intended to split SNPs and Indels, assess different filters andplot its figures using R-script, in addition to SNP and Indel Variant filtrations.   
+#However, we stopped at the statistics step as the stat.txt file contains zero reading for all parameters except the Passed Filters.
+## Here is the code that was prepared for the filteration part and not applied: 
 
+# Split SNPs and Indels:
+# i- For SNPs:
+gatk --java-options "-Xmx2G" SelectVariants \
+-R Homo_sapiens.GRCh38.dna.chromosome.21.fa\
+-V SRR8115017_bqsr_ann.vcf\
+--select-type-to-include SNP \
+-O SRR8115017_bqsr_ann _SNP.vcf
+ 
+#ii- For Indels:
+gatk --java-options "-Xmx2G" SelectVariants \
+-R Homo_sapiens.GRCh38.dna.chromosome.21.fa \
+-V SRR8115017_bqsr_ann.vcf \
+--select-type-to-include INDEL \
+-O SRR8115017_bqsr_ann _INDEL.vcf
+# Assess different filters in both known and novel
+## For performing the assessment of different filters, the following for loop will be used that will produce 18 files for SNPs and 18 files for INDELs:
+for var in "SNP" "INDEL";do
+ input=" SRR8115017_bqsr_ann _"$var".vcf"
+ for filter in "QD" "MQ" "MQRankSum" "FS" "SOR" "ReadPosRankSum" "AN" "DP" "InbreedingCoeff";do
+  filterValues=$var.$filter
+  awk -v k="$filter=" '!/#/{n=split($8,a,";"); for(i=1;i<=n;i++) if(a[i]~"^"k) {sub(k,$3" ",a[i]); print a[i]}}' $input > $filterValues
+  grep -v "^\." $filterValues > known.$var.$filter
+  grep "^\." $filterValues > novel.$var.$filter
+done; done
+
+# SNP and Indel Variant filteration
+## i- SNP Variant filteration
+gatk --java-options "-Xmx2G" VariantFiltration \
+-R Homo_sapiens.GRCh38.dna.chromosome.21.fa \
+-V SRR8115017_bqsr_ann _SNP.vcf \
+--filter-name "snpQD" \
+--filter-expression "vc.hasAttribute('QD') && QD < 2.0" \
+--filter-name "snpMQ" \
+--filter-expression "vc.hasAttribute('MQ') && MQ < 40.0" \
+--filter-name "snpMQRankSum" \
+--filter-expression "vc.hasAttribute('MQRankSum') && MQRankSum < -12.5" \
+--filter-name "snpFS" \
+--filter-expression "vc.hasAttribute('FS') && FS > 60.0" \
+--filter-name "snpSOR" \
+--filter-expression "vc.hasAttribute('SOR') && SOR > 4.0" \
+--filter-name "snpReadPosRankSum" \
+--filter-expression "vc.hasAttribute('ReadPosRankSum') && ReadPosRankSum < -8.0" \
+--filter-name "snpDP" \
+--filter-expression "vc.hasAttribute('DP') && DP > 3105" \
+-O raw_variants_ann_SNP_clean.vcf
+
+## ii- INDEL Variant filtration
+gatk --java-options "-Xmx2G" VariantFiltration \
+-R Homo_sapiens.GRCh38.dna.chromosome.21.fa \
+-V SRR8115017_bqsr_ann _INDEL.vcf \
+--filter-name "indelQD" \
+--filter-expression "vc.hasAttribute('QD') && QD < 2.0" \
+--filter-name "indelFS" \
+--filter-expression "vc.hasAttribute('FS') && FS > 200.0" \
+--filter-name "indelSOR" \
+--filter-expression "vc.hasAttribute('SOR') && SOR > 10.0" \
+--filter-name "indelReadPosRankSum" \
+--filter-expression "vc.hasAttribute('ReadPosRankSum') && ReadPosRankSum < -20.0" \
+--filter-name "indelInbreedingCoeff" \
+--filter-expression "vc.hasAttribute('InbreedingCoeff') && InbreedingCoeff < -0.8" \
+--filter-name "indelDP" \
+--filter-expression "vc.hasAttribute('DP') && DP > 3105" \
+-O raw_variants_ann_INDEL_clean.vcf
