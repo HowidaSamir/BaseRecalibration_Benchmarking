@@ -18,7 +18,6 @@ samtools sort bowtie2.bam -o SRR8115017.sorted.bam
 
 #Mark-duplicates:
 picard_path=$CONDA_PREFIX/share/picard-2.19.0-0
-
 java -Xmx2g -jar $picard_path/picard.jar MarkDuplicates INPUT=SRR8115017.sorted.bam OUTPUT=SRR8115017.dedup.bam METRICS_FILE=SRR8115017.metrics.txt
 
 #Indexing
