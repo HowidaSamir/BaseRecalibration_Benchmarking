@@ -13,7 +13,8 @@ In our project, we planned to compare variant calling on different types of data
 		
 **III. Material and methods**
 
-*Materials:
+*Materials*
+
 i- Software:
 - Bowtie 2: Fast and sensitive read alignment
 - Sequence Alignment/Map tools (SAMtools)
@@ -22,10 +23,13 @@ i- Software:
 - Tabix Tool
 - Real Time Genomics (RTG)
 - R and R libraries, ggplot2
-ii- Hardware: 
+
+ii- Hardware:
 Combination of individual computers with variable RAM and disk memory
+
 iii- Datasets
-- We first considered applying base quality score recalibration on a model organism other than human. We chose E.coli. We found "PathSeq" in GATK, however, it is still a beta version and we will not be able to rely on it. Haplotype caller can be used to identify the ploidy of an unknown sample, however, this is not our target here. In order for us to apply base quality score recalibration, we have to create our own set of known variants for E.coli for which we don't have quite the time. In addition, GATK best practice for germline short variant discovery mentioned that variant recalibration's algorithm requires high-quality sets of known variants to use as training and truth resources, which for many organisms are not yet available. It also requires quite a lot of data in order to learn the profiles of good vs. bad variants, so it can be difficult or even impossible to use on small datasets that involve only one or a few samples, on targeted sequencing data, on RNAseq, and on non-model organisms. GATK best practices, recommendation and testing are based on human variations. Therefore, we choose to check the significance of applying BQSR vs not applying it on human reads for DNA sequences mapped to human genome. 
+
+We first considered applying base quality score recalibration on a model organism other than human. We chose E.coli. We found "PathSeq" in GATK, however, it is still a beta version and we will not be able to rely on it. Haplotype caller can be used to identify the ploidy of an unknown sample, however, this is not our target here. In order for us to apply base quality score recalibration, we have to create our own set of known variants for E.coli for which we don't have quite the time. In addition, GATK best practice for germline short variant discovery mentioned that variant recalibration's algorithm requires high-quality sets of known variants to use as training and truth resources, which for many organisms are not yet available. It also requires quite a lot of data in order to learn the profiles of good vs. bad variants, so it can be difficult or even impossible to use on small datasets that involve only one or a few samples, on targeted sequencing data, on RNAseq, and on non-model organisms. GATK best practices, recommendation and testing are based on human variations. Therefore, we choose to check the significance of applying BQSR vs not applying it on human reads for DNA sequences mapped to human genome. 
 We decided to choose diverse datasets and GATK pipelines. We chose germline short variant discovery (SNPs + Indels) and somatic short variant discovery (SNVs + Indels) pipelines. Datasets were cell line (47,XX, +21) genomic DNA, whole-exome germline DNA, and whole-genome somatic DNA. In materials and methods, the pipeline of the first dataset is expained in detail. 
 The applied data set (47,XX,+21) genomic DNA was aligned to a reference of whole genome one time and to a reference of chromosome 21 another time using bowtie2 ; resulting in the generation of sam files which later were converted to sorted bam files using samtools.
 The applied datasets in this project were downloaded from: 
@@ -39,6 +43,8 @@ Each dataset was aligned to a reference genome by using BWA mem (https://github.
 
 **V. Discussion**
 
+Base recalibrator applies a "yates" correction for low occupancy bins. Rather than inferring the true Q score from mismatches bases. GATK actually infer it from (# mismatches + 1) / (# bases + 2). This deals very nicely with overfitting problems, which has only a minor impact on data sets with billions of bases but is critical to avoid overconfidence in rare bins in sparse data. Although Base recalibration is critical step but it can't work well on a small number of aligned reads as it expects to see more than 100M bases per read group. So we can not count on base recalibration in all cases. 
+
 *Challenges*
 
 1. VCF file of known variants have been very challenging. We believe that VCF files are not well-curated even if they are uploaded on reliable data resources like Ensemble for example. We struggled to solve many errors found in whole-genome VCF file (latest release) and also individual VCF files for chromosomes 1, 15, and 21.
@@ -50,10 +56,6 @@ Each dataset was aligned to a reference genome by using BWA mem (https://github.
 - There is an urgent need to create an automated VCF files curator according to the VCF specs. This will save a lot of time an effort for whoever want to apply variant calling as downstream analysis.
 - Guidelines should be implemented to suggest the optimum number of reads and samples to to carry on variant calling.
 - Researchers working on other species than human should collaborate to create a reliable curated database for known variants for each species especially bacteria for their high abundancy and clinical significance.
-
-
-
-
 
 
 **VI. References**
