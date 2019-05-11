@@ -22,7 +22,7 @@ bgzip -c SRR8115017.gvcf > SRR8115017.gvcf.gz
 tabix -p vcf SRR8115017.gvcf.gz
 ii- Calculate some statistics about the gvcf file
 conda install -c bioconda rtg-tools
-rtg vcfstats SRR8115017.gvcf.gz > recl_stats.txt
+rtg vcfstats SRR8115017.gvcf.gz > recal_stats.txt
 
 #In the pipeline we intended to split SNPs and Indels, assess different filters andplot its figures using R-script, in addition to SNP and Indel Variant filtrations.   
 #However, we stopped at the statistics step as the stat.txt file contains zero reading for all parameters except the Passed Filters.
