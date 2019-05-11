@@ -1,5 +1,5 @@
 1. Teamleader: I have tried with my colleagues to assign tasks and make sure clear communication is established between team members. We had fruitful brainstorming to every step of the project starting from the dataset choice till the very last conclusion we could reach.
-2. Going thoroughly through GATK Best Practices to make sure we choose the suitable best practice according to the type of the dataset.
+2. Going thoroughly through GATK Best Practice to make sure we choose the suitable best practice according to the type of the dataset.
 https://software.broadinstitute.org/gatk/best-practices/workflow?id=11145
 https://software.broadinstitute.org/gatk/best-practices/workflow?id=11146
 https://software.broadinstitute.org/gatk/best-practices/workflow?id=11164
@@ -23,6 +23,7 @@ perl -pe 's/^([^#])/chr\1/' Homo_sapiens.vcf >> Homo_adjusted.vcf
 
 In the error message when it says "approximately", that doesn't have to be the exact line number and that's why we need to investigate for the line number first.
 11. Writing the proposal introduction, aim, shared in methods, challenges, recommendations, and conclusion.
+12. Fixed corrupted proposal file and supplying missing parts.
 12. Extra tips for anyone working on a group project:
 - Effective communication is the key for any project to stand and survive any challenges. By effective communication, I mean each group member has a solid idea of what other members are doing and ready to offer help as long as they can.
 - Prior to starting to assign tasks to each member, especially when it comes to Bioinformatics, computational resources should be clearly clarified so that time and effort are saved.
