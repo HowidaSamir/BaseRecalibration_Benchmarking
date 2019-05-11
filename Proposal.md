@@ -122,7 +122,7 @@ SNPs or Indels matching the recommended parameters will be considered bad and fi
 
 **V. Discussion**
 
-Base recalibrator applies a "yates" correction for low occupancy bins. Rather than inferring the true Q score from mismatches bases. GATK actually infer it from (# mismatches + 1) / (# bases + 2). This deals very nicely with overfitting problems, which has only a minor impact on data sets with billions of bases but is critical to avoid overconfidence in rare bins in sparse data. Although Base recalibration is critical step but it can't work well on a small number of aligned reads as it expects to see more than 100M bases per read group. So we can not count on base recalibration in all cases. 
+Base recalibrator applies a "yates" correction for low occupancy bins. Rather than inferring the true Q score from mismatches bases. GATK actually infer it from (# mismatches + 1) / (# bases + 2). This deals very nicely with overfitting problems, which has only a minor impact on data sets with billions of bases but is critical to avoid overconfidence in rare bins in sparse data. Although Base recalibration is critical step but it can't work well on a small number of aligned reads as it expects to see more than 100M bases per read group. So we can not count on base recalibration in all cases.
 
 *Challenges*
 
@@ -137,8 +137,10 @@ Base recalibrator applies a "yates" correction for low occupancy bins. Rather th
 - Researchers working on other species than human should collaborate to create a reliable curated database for known variants for each species especially bacteria for their high abundancy and clinical significance.
 - There are other variant callers avaiable such as - ANGSD: Analysis of next generation Sequencing Data, FreeBayes, SNVer, VarDict, LoFreq, VarScan, and Platypus
 
+**VI. Conclusion**
+ Variant calling for variants in human is a very computationally expensive process. BQSR will not function efficiently unless it is provided with the whole human genome known variants. For this to happen, the VCF file of known variants have to be indexed and this step involved numerous errors in parsing the uncurated VCF file. Working on individual chromosomes is not either efficient or reproducible for either alignment of the samples or indexing known variants of that particular chromosome. Splitting chromosomes of the whole genome is not also an option because BaseRacalibrator demands checking all variants at once. The accuracy and sensitivity of the germline variant discovery algorithm are significantly increased when it is provided with data from many samples at the same time. Incorporating multiple samples was not productive as it was interrupted by either the very slow Internet connection or limited computational resources.   
 
-**VI. References**
+**VII. References**
 
 1. https://gatkforums.broadinstitute.org/gatk/discussion/44/base-quality-score-recalibration-bqsr
 2. http://zenfractal.com/2014/01/25/bqsr/
