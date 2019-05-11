@@ -25,7 +25,7 @@ In the error message when it says "approximately", that doesn't have to be the e
 
 11. Writing the proposal introduction, aim, shared in materials, challenges, recommendations, and conclusion.
 12. Fixed corrupted proposal file and supplying missing parts.
-12. Extra tips for anyone working on a group project:
+13. Extra tips for anyone working on a group project:
 - Effective communication is the key for any project to stand and survive any challenges. By effective communication, I mean each group member has a solid idea of what other members are doing and ready to offer help as long as they can.
 - Prior to starting to assign tasks to each member, especially when it comes to Bioinformatics, computational resources should be clearly clarified so that time and effort are saved.
 - Computational resources include, but not limited to , Ubuntu operating system, Internet speed and accessbility, RAM, and memory disk space.
@@ -33,4 +33,7 @@ In the error message when it says "approximately", that doesn't have to be the e
 - Metadata should be thoroughly examined and checked for suitability in pipeline.
 - While troubleshooting, whether in a team or online, question should be stated clearly togeether with the faulty command and error received.
 - Always keep a draft for everything. Things  get messed up and we are human and forget.
+14. Helping colleagues through troubleshooting the errors they faced running pipelines.
+15. Making sure all team members are on the same page with problems we face and sharing answers and experiences together.
+16. We were all from Biology background and we did our best to deal with computer and programming issues as much as we can.
 
