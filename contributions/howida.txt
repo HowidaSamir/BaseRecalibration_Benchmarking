@@ -1,0 +1,8 @@
+Things i (Howida) contributed in:
+- VCF Statistics
+- VCF Filtration
+- Writing the Materials and Methods
+
+The statistics file contained zero readings, therefore the following filteration steps couldn't be conducted, however, the command lines for the filtartion were interpreted and written.
+
+all these parts were conducted by Maha and myself 
