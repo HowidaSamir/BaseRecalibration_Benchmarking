@@ -1,8 +1,8 @@
-1. Teamleader: I have tried with my colleagues to assign tasks and make sure clear communication is established between team members. We had fruitful brainstorming to every step of the project starting from the dataset choice till the very last conclusion we could reach.
+1. Team leader: I have tried with my colleagues to assign tasks and make sure clear communication is established between team members. We had fruitful brainstorming to every step of the project starting from the dataset choice till the very last conclusion we could reach.
 2. Going thoroughly through GATK Best Practice to make sure we choose the suitable best practice according to the type of the dataset.
-https://software.broadinstitute.org/gatk/best-practices/workflow?id=11145
-https://software.broadinstitute.org/gatk/best-practices/workflow?id=11146
-https://software.broadinstitute.org/gatk/best-practices/workflow?id=11164
+https://software.broadinstitute.org/gatk/best-practices/workflow?id=11145 
+https://software.broadinstitute.org/gatk/best-practices/workflow?id=11146 
+https://software.broadinstitute.org/gatk/best-practices/workflow?id=11164 
 3. Investigating the feasibility of choosing E.coli to apply variant calling on and justified the reasons for my colleagues.
 https://gatkforums.broadinstitute.org/gatk/discussion/10913/how-to-run-the-pathseq-pipeline
 4. Searching for suitable dataset to start our project with. Learnt how to navigate through SRA and use its advance search options. The search options were explained to my colleagues to help them find datasets too.
@@ -14,14 +14,14 @@ echo $(cat myfile.fastq|wc -l)/4|bc
 9. Worked with my colleague Nada to index the VCF file of the whole human genome. Supplied the commands to change the name of the chromosome in the VCF file to be compatible with the reference file using the code:
 grep "^#" Homo_sapiens.vcf > Homo_adjusted.vcf
 perl -pe 's/^([^#])/chr\1/' Homo_sapiens.vcf >> Homo_adjusted.vcf 
-10. Troubleshooted unparsed VCF files and shared the way with my colleagues on GitHub if we would like to remove a line:
-*To check for the line number:
-grep -nr "yourstring" yourfile.vcf
-*To delete the line:
-sed -i 'line#d' yourfile.vcf
-*To make sure line is deleted:
-grep -w "yourstring" yourfile.vcf
-In the error message when it says "approximately", that doesn't have to be the exact line number and that's why we need to investigate for the line number first.
+10. Troubleshooted unparsed VCF files and shared the way with my colleagues on GitHub if we would like to remove a line: 
+*To check for the line number: 
+grep -nr "yourstring" yourfile.vcf 
+*To delete the line: 
+sed -i 'line#d' yourfile.vcf 
+*To make sure line is deleted: 
+grep -w "yourstring" yourfile.vcf 
+**In the error message when it says "approximately", that doesn't have to be the exact line number and that's why we need to investigate for the line number first.** 
 
 11. Writing the proposal introduction, aim, shared in materials, challenges, recommendations, and conclusion.
 12. Fixed corrupted proposal file and supplying missing parts.
