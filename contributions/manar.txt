@@ -34,9 +34,12 @@ but unfortunately we couldn't because the number of annotated variants equal to 
 So the pdf file of figures "supposed results before filtration" in results folder got out R script using test data 
 ( wget https://de.cyverse.org/dl/d/3CE425D7-ECDE-46B8-AB7F-FAF07048AD42/samples.tar.gz ) that supposed to be replaced by our data.
 
+5. Search for other tools for variant calling : GATK, Platypus, VarScan, LoFreq, FreeBayes, SNVer, SAMtools and VarDict
+through this paper: " https://www.nature.com/articles/srep43169?WT.feed_name=subjects_biotechnology "
+
 # Reading:
-5.	some information about the study of this dataset: https://www.ncbi.nlm.nih.gov/pubmed?LinkName=sra_pubmed&from_uid=6667925
-6.	Paper related to benchmarking: https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1006494
+6.	some information about the study of this dataset: https://www.ncbi.nlm.nih.gov/pubmed?LinkName=sra_pubmed&from_uid=6667925
+7.	Paper related to benchmarking: https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1006494
  
 # Troubleshooting: help in solving the errors that occur in running pipeline of this dataset
 • https://gatkforums.broadinstitute.org/gatk/discussion/7020/error-malformed-vcf-empty-alleles-are-not-permitted-in-vcf-records
