@@ -120,6 +120,7 @@ High values indicate strand bias in the data Recommendation: SNPs: 3.0, INDELS: 
 All plots are generated using the ggplot2 library in R. On the x-axis are the annotation values, and on the y-axis are the density values. The area under the density plot gives the probability of observing the annotation values (https://gatkforums.broadinstitute.org/gatk/discussion/6925/understanding-and-adapting-the-generic-hard-filtering-recommendations). 
 
 *SNP and Indel Variant filteration*
+
 SNPs or Indels matching the recommended parameters will be considered bad and filtered out, i.e. marked with a filter name (which will be specified in the filtering command) in the output VCF file. SNPs or Indels that do not match any of these parameters will be considered good and marked PASS in the output VCF file (https://software.broadinstitute.org/gatk/documentation/article?id=2806).
 
 **V. Discussion**
