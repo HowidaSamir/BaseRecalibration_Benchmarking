@@ -12,7 +12,7 @@ https://gatkforums.broadinstitute.org/gatk/discussion/10913/how-to-run-the-paths
 8. Suggested the command  to count the FASTQ file reads(after searching): echo $(cat myfile.fastq|wc -l)/4|bc
 9. Worked with my colleague Nada to index the VCF file of the whole human genome. Supplied the commands to change the name of the chromosome in the VCF file to be compatible with the reference file using the code:
 grep "^#" Homo_sapiens.vcf > Homo_adjusted.vcf
-perl -pe 's/^([^#])/chr\1/' Homo_sapiens.vcf >> Homo_adjusted.vcf 
+ perl -pe 's/^([^#])/chr\1/' Homo_sapiens.vcf >> Homo_adjusted.vcf 
 10. Troubleshooted unparsed VCF files and shared the way with my colleagues on GitHub if we would like to remove a line:
     *To check for the line number:
     grep -nr "yourstring" yourfile.vcf
