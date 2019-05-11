@@ -1,1 +1,5 @@
+i performed the VCF statistics for Nour's samples however the resulted sat.txt file contains zero reads except for the filters passed section for both un-recalibrated and recaliberated samples. 
 
+- Accoding to that we stop running the codes. Howevere i and Hewida adjust the followed steps: SNPs and INDELs splliting and their filterion code but not applied it. 
+
+- Contributed in Writing the Materials and Methods part with Hewida
