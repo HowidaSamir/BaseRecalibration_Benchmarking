@@ -16,7 +16,7 @@ In our project, we planned to compare variant calling on different types of data
 *Materials*
 
 i- Software:
-- Bowtie 2: Fast and sensitive read alignment
+- Bowtie2: Fast and sensitive read alignment
 - Sequence Alignment/Map tools (SAMtools)
 - Picard Tools
 - Genome Analysis Toolkit (GATK)
@@ -35,10 +35,12 @@ The applied data set (47,XX,+21) genomic DNA was aligned to a reference of whole
 The applied datasets in this project were downloaded from: 
 
 •	https://www.ncbi.nlm.nih.gov/sra/SRX4941314[accn] 
+
 •	https://www.ncbi.nlm.nih.gov/Traces/study/?acc=SRP053196
+
 •	ftp://ftp-trace.ncbi.nih.gov/1000genomes/ftp/technical/reference/human_g1k_v37.fasta.gz 
 
-Each dataset was aligned to a reference genome by using BWA mem (https://github.com/molgenis/NGS_DNA); resulting in the generation of sam files which later were converted to sorted bam files using samtools.
+Each dataset was aligned to a reference genome by using Bowtie2 (https://github.com/molgenis/NGS_DNA); resulting in the generation of sam files which later were converted to sorted bam files using samtools.
 
 *Methods*
 
@@ -74,7 +76,8 @@ the first pass consists of calculating error empirically and finding patterns in
 The second pass is performed by using the ApplyBQSR tool and consists of applying numerical corrections to each individual basecall based on the patterns identified in the first step (recorded in the recalibration report) and write out the recalibrated data to a new BAM file (https://software.broadinstitute.org/gatk/documentation/tooldocs/4.0.5.0/org_broadinstitute_hellbender_tools_walkers_bqsr_ApplyBQSR.php). 
 
 ######################################################################## 
-The variant calling steps were performed on both un-recalibrated and   #
+The variant calling steps were performed on both un-recalibrated and
+                                                                      #
  #recalibrated samples.                                               #
 ######################################################################
 
@@ -100,18 +103,26 @@ A vcf file containing variants needs to be subsetted in order to facilitate cert
 
 *Assess different filters in both known and novel*
 For the filtration step, nine filters were used (https://informatics.fas.harvard.edu/whole-genome-resquencing-for-population-genomics-fastq-to-vcf.html#filtering):
+
     ## AN: Total number of alleles in called genotypes 
+    
     ## DP: The unfiltered depth of coverage across all samples
+    
     ## QD: QualByDepth
 Variant quality score divided by the depth of the alternate allele. Recommendation: SNPs: 2.0, INDELS: 2.0
     ## FS: FisherStrand
+    
 Phred-scaled p-values using Fisher's Exact Test for strand bias. Higher values are more likely false positive calls. Recommendation: SNPs: 60.0, INDELS: 200.0
+
     ## MQ: RMSMappingQuality
 Root Mean Square of the mapping quality of reads across samples. Recommendation: SNPs: 40.0
+
     ## MQRankSum: MappingQualityRankSumTest
 U-based z-approximation from Mann-Whitney Rank Sum Test for mapping qualities, comparing reads with reference bases and those with alternate alleles. Recommendation: SNPs: -12.5
+
     ## ReadPosRankSum: ReadPosRankSumTest
 U-based z-approximation from Mann-Whitney Rank Sum Test for distance from end of reads for those reads with an alternate allele. As bases near the ends of reads are more likely to contain errors, if all reads with the allele are near the end of the reads this may be indicative of an error. Recommendation: SNPs: -8.0, INDELS: -20.0
+
     ## SOR: StrandOddsRatio
 High values indicate strand bias in the data Recommendation: SNPs: 3.0, INDELS: 10.
 
