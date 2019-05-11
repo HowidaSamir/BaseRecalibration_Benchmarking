@@ -67,4 +67,4 @@ bgzip -c SRR8115017.gvcf > SRR8115017.gvcf.gz
 tabix -p vcf SRR8115017.gvcf.gz
 ii- Calculate some statistics about the gvcf file
 conda install -c bioconda rtg-tools
-rtg vcfstats SRR8115017.gvcf.gz > recl_stats.txt
+rtg vcfstats SRR8115017.gvcf.gz > recal_stats.txt
