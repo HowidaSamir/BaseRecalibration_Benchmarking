@@ -22,7 +22,7 @@ perl -pe 's/^([^#])/chr\1/' Homo_sapiens.vcf >> Homo_adjusted.vcf
     grep -w "yourstring" yourfile.vcf
 In the error message when it says "approximately", that doesn't have to be the exact line number and that's why we need to investigate for the line number first.
 
-11. Writing the proposal introduction, aim, shared in methods, challenges, recommendations, and conclusion.
+11. Writing the proposal introduction, aim, shared in materials, challenges, recommendations, and conclusion.
 12. Fixed corrupted proposal file and supplying missing parts.
 12. Extra tips for anyone working on a group project:
 - Effective communication is the key for any project to stand and survive any challenges. By effective communication, I mean each group member has a solid idea of what other members are doing and ready to offer help as long as they can.
