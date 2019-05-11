@@ -1,0 +1,27 @@
+# VCF statistics for un-recaliberated samples
+i- Index the VCF file using the tabix tool
+conda install -c bioconda tabix
+bgzip -c SRR8115017.gvcf > SRR8115017.gvcf.gz
+tabix -p vcf SRR8115017.gvcf.gz
+ii- Calculate some statistics about the gvcf file
+conda install -c bioconda rtg-tools
+rtg vcfstats SRR8115017.gvcf.gz > stats.txt
+
+
+# VCF statistics for recaliberated samples
+i- Index the VCF file using the tabix tool
+conda install -c bioconda tabix
+bgzip -c SRR8115017.bqsr.gvcf > SRR8115017.bqsr.gvcf.gz
+tabix -p vcf SRR8115017.bqsr.gvcf.gz
+ii- Calculate some statistics about the gvcf file
+conda install -c bioconda rtg-tools
+rtg vcfstats SRR8115017.bqsr.gvcf.gz > recal_stats.txtVCF statistics for un-recaliberated samples
+i- Index the VCF file using the tabix tool
+conda install -c bioconda tabix
+bgzip -c SRR8115017.gvcf > SRR8115017.gvcf.gz
+tabix -p vcf SRR8115017.gvcf.gz
+ii- Calculate some statistics about the gvcf file
+conda install -c bioconda rtg-tools
+rtg vcfstats SRR8115017.gvcf.gz > stats.txt
+
+
