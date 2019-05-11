@@ -9,17 +9,18 @@ https://gatkforums.broadinstitute.org/gatk/discussion/10913/how-to-run-the-paths
 5. Suggested a large group of different datasets to my colleagues.
 6. Moderated my colleagues to share any educational resources they find online with each other.
 7. Tried to help my colleague Eman working on the dataset she downloaded, however, hard disk space did not help.
-8. Suggested the command  to count the FASTQ file reads(after searching): echo $(cat myfile.fastq|wc -l)/4|bc
+8. Suggested the command  to count the FASTQ file reads(after searching):
+echo $(cat myfile.fastq|wc -l)/4|bc
 9. Worked with my colleague Nada to index the VCF file of the whole human genome. Supplied the commands to change the name of the chromosome in the VCF file to be compatible with the reference file using the code:
 grep "^#" Homo_sapiens.vcf > Homo_adjusted.vcf
- perl -pe 's/^([^#])/chr\1/' Homo_sapiens.vcf >> Homo_adjusted.vcf 
+perl -pe 's/^([^#])/chr\1/' Homo_sapiens.vcf >> Homo_adjusted.vcf 
 10. Troubleshooted unparsed VCF files and shared the way with my colleagues on GitHub if we would like to remove a line:
-    *To check for the line number:
-    grep -nr "yourstring" yourfile.vcf
-    *To delete the line:
-    sed -i 'line#d' yourfile.vcf
-    *To make sure line is deleted:
-    grep -w "yourstring" yourfile.vcf
+*To check for the line number:
+grep -nr "yourstring" yourfile.vcf
+*To delete the line:
+sed -i 'line#d' yourfile.vcf
+*To make sure line is deleted:
+grep -w "yourstring" yourfile.vcf
 In the error message when it says "approximately", that doesn't have to be the exact line number and that's why we need to investigate for the line number first.
 
 11. Writing the proposal introduction, aim, shared in materials, challenges, recommendations, and conclusion.
