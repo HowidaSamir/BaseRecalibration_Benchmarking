@@ -10,8 +10,8 @@ RGID=$(cat $R1 | head -n1 | sed 's/:/_/g' |cut -d "." -f1)
 PU=$RGID.$LB
 LB="SRR8115017_same"
 PL="Illumina"
-#Alignment step:
 
+#Alignment step:
 bowtie2 -p 20 -q --no-unal -x index_two_bowtie2/Homo_sapiens.fa -U SRR8115017.fastq.gz --rg-id $RGID --rg SM:$SM --rg PL:$PL --rg LB:$LB --rg PU:$PU 2> align_stats.txt| samtools view -Sb -o bowtie2.bam
 
 #Sorting:
@@ -40,17 +40,13 @@ gatk IndexFeatureFile -F Homo_sapiens_chr21.vcf
 head -1291601 Homo_sapiens_chr21.vcf | tail -1   #Then remove this record 
 
 #Base recalibration:
-
 gatk --java-options "-Xmx2G" BaseRecalibrator -R Homo_sapiens.GRCh38.dna.chromosome.21.fa -I SRR8115017.dedup.bam --known-sites Homo_sapiens_chr21.vcf -O SRR8115017.report
-
 gatk --java-options "-Xmx2G" ApplyBQSR -R Homo_sapiens.GRCh38.dna.chromosome.21.fa -I SRR8115017.dedup.bam -bqsr SRR8115017.report -O SRR8115017.bqsr.bam --add-output-sam-program-record --emit-original-quals
 
 #Without base rec.
-
 gatk --java-options "-Xmx2G" HaplotypeCaller -R Homo_sapiens.GRCh38.dna.chromosome.21.fa -I SRR8115017.dedup.bam --emit-ref-confidence GVCF --pcr-indel-model NONE -O SRR8115017.gvcf
 
 #With base rec.
-
 gatk --java-options "-Xmx2G" HaplotypeCaller -R Homo_sapiens.GRCh38.dna.chromosome.21.fa -I SRR8115017.bqsr.bam --emit-ref-confidence GVCF --pcr-indel-model NONE -O SRR8115017.bqsr.gvcf
 
 
