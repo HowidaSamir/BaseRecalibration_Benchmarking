@@ -76,9 +76,10 @@ the first pass consists of calculating error empirically and finding patterns in
 The second pass is performed by using the ApplyBQSR tool and consists of applying numerical corrections to each individual basecall based on the patterns identified in the first step (recorded in the recalibration report) and write out the recalibrated data to a new BAM file (https://software.broadinstitute.org/gatk/documentation/tooldocs/4.0.5.0/org_broadinstitute_hellbender_tools_walkers_bqsr_ApplyBQSR.php). 
 
 ######################################################################## 
-The variant calling steps were performed on both un-recalibrated and
+
+The variant calling steps were performed on both un-recalibrated and  #
                                                                       #
- #recalibrated samples.                                               #
+ recalibrated samples.                                               #
 ######################################################################
 
 *Variant Calling*
@@ -93,8 +94,10 @@ ii- Calculate some statistics:
 The performance of some quick statistics was done by using the Real Time Genomic (RTG) tools rtg vcfstats command. These tools include useful utilities for dealing with vcf files and sequence data. The most  interesting is the vcfeval command that performed comparison of vcf files (https://github.com/RealTimeGenomics/rtg-tools). 
 
 ##########################################################################################################################
+
 In the pipeline we intended to split SNPs and Indels, assess different filters andplot its figures using R-script
-, in addition to SNP and Indel Variant filtrations.However, we stopped at the statistics step as the stat.txt file contains zero reading for all parameters except the Passed Filters.                                                        
+, in addition to SNP and Indel Variant filtrations.However, we stopped at the statistics step as the stat.txt file contains zero reading for all parameters except the Passed Filters.  
+
 ###########################################################################################################################
 
 *Split SNPs and Indels*
@@ -110,8 +113,8 @@ For the filtration step, nine filters were used (https://informatics.fas.harvard
     
     ## QD: QualByDepth
 Variant quality score divided by the depth of the alternate allele. Recommendation: SNPs: 2.0, INDELS: 2.0
-    ## FS: FisherStrand
-    
+
+    ## FS: FisherStrand    
 Phred-scaled p-values using Fisher's Exact Test for strand bias. Higher values are more likely false positive calls. Recommendation: SNPs: 60.0, INDELS: 200.0
 
     ## MQ: RMSMappingQuality
