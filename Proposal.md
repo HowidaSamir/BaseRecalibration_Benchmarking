@@ -13,20 +13,23 @@ In our project, we planned to compare variant calling on different types of data
 		
 **III. Material and methods**
 
-*Materials*
-
+*Materials:
 i- Software:
-•	Burrows-Wheeler Alignment Tool (BWA)
-•	Sequence Alignment/Map tools (SAMtools)
-•	Picard Tools
-•	Genome Analysis Toolkit (GATK)
-•	Tabix Tool
-•	Real Time Genomics (RTG)
-•	R and R libraries, ggplot2 
-
+- Bowtie 2: Fast and sensitive read alignment
+- Sequence Alignment/Map tools (SAMtools)
+- Picard Tools
+- Genome Analysis Toolkit (GATK)
+- Tabix Tool
+- Real Time Genomics (RTG)
+- R and R libraries, ggplot2
+ii- Hardware: 
+Combination of individual computers with variable RAM and disk memory
 ii- Hardware: 
 A computer with as much memory and computing power as possible. 
 iii- Datasets
+We first considered applying base quality score recalibration on a model organism other than human. We chose E.coli. We found "PathSeq" in GATK, however, it is still a beta version and we will not be able to rely on it. Haplotype caller can be used to identify the ploidy of an unknown sample, however, this is not our target here. In order for us to apply base quality score recalibration, we have to create our own set of known variants for E.coli for which we don't have quite the time. In addition, GATK best practice for germline short variant discovery mentioned that variant recalibration's algorithm requires high-quality sets of known variants to use as training and truth resources, which for many organisms are not yet available. It also requires quite a lot of data in order to learn the profiles of good vs. bad variants, so it can be difficult or even impossible to use on small datasets that involve only one or a few samples, on targeted sequencing data, on RNAseq, and on non-model organisms. GATK best practices, recommendation and testing are based on human variations. Therefore, we choose to check the significance of applying BQSR vs not applying it on human reads for DNA sequences mapped to human genome. 
+We decided to choose diverse datasets and GATK pipelines. We chose germline short variant discovery (SNPs + Indels) and somatic short variant discovery (SNVs + Indels) pipelines. Datasets were cell line (47,XX, +21) genomic DNA, whole-exome germline DNA, and whole-genome somatic DNA. In materials and methods, the pipeline of the first dataset is expained in detail. 
+The applied data set (47,XX,+21) genomic DNA was downloaded from https://www.ncbi.nlm.nih.gov/sra/SRX4941314[accn] . It was aligned to a reference of whole genome one time and to a reference of chromosome 21 another time using bowtie (http://bowtie-bio.sourceforge.net/index.shtml); resulting in the generation of sam files which later were converted to sorted bam files using samtools.
 The applied datasets in this project were downloaded from: 
 •	https://www.ncbi.nlm.nih.gov/sra/SRX4941314[accn] 
 •	https://www.ncbi.nlm.nih.gov/Traces/study/?acc=SRP053196
