@@ -20,8 +20,8 @@ perl -pe 's/^([^#])/chr\1/' Homo_sapiens.vcf >> Homo_adjusted.vcf
     sed -i 'line#d' yourfile.vcf
     *To make sure line is deleted:
     grep -w "yourstring" yourfile.vcf
-
 In the error message when it says "approximately", that doesn't have to be the exact line number and that's why we need to investigate for the line number first.
+
 11. Writing the proposal introduction, aim, shared in methods, challenges, recommendations, and conclusion.
 12. Fixed corrupted proposal file and supplying missing parts.
 12. Extra tips for anyone working on a group project:
