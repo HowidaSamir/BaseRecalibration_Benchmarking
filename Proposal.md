@@ -41,27 +41,32 @@ The applied datasets in this project were downloaded from:
 Each dataset was aligned to a reference genome by using BWA mem (https://github.com/molgenis/NGS_DNA); resulting in the generation of sam files which later were converted to sorted bam files using samtools.
 
 *Methods*
+
 The following steps were applied on each of the three datasets in parallel 
 Merge replicates:
 Merging replicates was done by using the Picard tools were used to merge the replicates.
 The PicardTools are built with java, according to that when running a jar file (e.g., java -jar picard.jar <PicardTool>) a memory limit to java can be added, for example requiring java to use no more than 2GB memory: -Xmx2g. This can help ensure our program does not use more memory than we request (https://informatics.fas.harvard.edu/whole-genome-resquencing-for-population-genomics-fastq-to-vcf.html).
 
 *Mapping QC*
+
 Samtools were used for the quality control of the mapped reads.
 Mark duplicate
 Same DNA fragments may be sequenced many times during the sequencing process. The resulted duplicate reads may cause the propagation of errors across all the subsequent duplicate reads. The duplicate reads can violate the assumptions of variant calling (https://github.com/yuhuanq/GATK-Pipeline), so we marked the duplicate reads and deleted it using the Picard tools. 
 
 *Indexing* 
+
 i. Indexing dedupped bam samples file
 The BuildBamIndex tool generates a BAM index ".bai" file for the input BAM, allowing a fast look-up of data in a BAM file (https://broadinstitute.github.io/picard/command-line-overview.html#BuildBamIndex). In this project, BuildBamIndex tool was used to  index the dedupped bam samples file. 
 ii. Indexing reference for GATK
 GATK 4 tools require that the main FASTA file be accompanied by a dictionary file (.dict) and an index file (.fai), as it allows efficient random access to the reference bases. The GATK look for these index files based on their name, so it's important that they have the same basename as the FASTA file (https://software.broadinstitute.org/gatk/documentation/article?id=11013). We generated these files by applying the following command lines: 
 
 *Download known variants*
+
 The known variants were downloaded for the used reference from the following link: 
 ftp://ftp.ensembl.org/pub/release-96/variation/vcf/homo_sapiens/homo_sapiens-chr21.vcf.gz 
 
 *Bases Recalibration(BQSR)*    
+
 The goal of the Bases Recalibration (BQSR) procedure is to correct the systematic bias that might affect the assignment of base quality scores by the sequencer (https://gatkforums.broadinstitute.org/gatk/discussion/44/base-quality-score-recalibration-bqsr). The procedure of BQSR consists two main passes:
 the first pass consists of calculating error empirically and finding patterns in how error varies with basecall features over all bases. This step is performed by using the BaseRecalibrator tool and the relevant observations are written to a recalibration table (https://software.broadinstitute.org/gatk/documentation/tooldocs/4.0.5.0/org_broadinstitute_hellbender_tools_walkers_bqsr_BaseRecalibrator.php) . 
 The second pass is performed by using the ApplyBQSR tool and consists of applying numerical corrections to each individual basecall based on the patterns identified in the first step (recorded in the recalibration report) and write out the recalibrated data to a new BAM file (https://software.broadinstitute.org/gatk/documentation/tooldocs/4.0.5.0/org_broadinstitute_hellbender_tools_walkers_bqsr_ApplyBQSR.php). 
@@ -72,9 +77,11 @@ The variant calling steps were performed on both un-recalibrated and   #
 ######################################################################
 
 *Variant Calling*
+
 HaplotypeCaller was used to call variants using BAM files of tis sample. The output files were GVCF files which has raw, unfiltered SNP and indel calls for all sites, variant or invariant (https://software.broadinstitute.org/gatk/documentation/tooldocs/4.0.5.0/org_broadinstitute_hellbender_tools_walkers_haplotypecaller_HaplotypeCaller.php). 
 
 *VCF statistics*
+
 i- index the VCF file:
 The generated vcf files were indexed using Tabix. It indexes position sorted files in TAB-delimited formats and creates an index file (.gz.tbi ) (Heng Li, 2011, https://doi.org/10.1093/bioinformatics/btq671). 
 ii- Calculate some statistics:
@@ -86,6 +93,7 @@ In the pipeline we intended to split SNPs and Indels, assess different filters a
 ###########################################################################################################################
 
 *Split SNPs and Indels*
+
 A vcf file containing variants needs to be subsetted in order to facilitate certain analyses (e.g. comparing and contrasting cases vs. controls; extracting variant or non-variant loci that meet certain requirements). SelectVariants GATK tool can be used to split the variants into SNPs and Indels (https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_tools_walkers_variantutils_SelectVariants.php).
 
 *Assess different filters in both known and novel*
@@ -106,6 +114,7 @@ U-based z-approximation from Mann-Whitney Rank Sum Test for distance from end of
 High values indicate strand bias in the data Recommendation: SNPs: 3.0, INDELS: 10.
 
 *Plotting figures* 
+
 All plots are generated using the ggplot2 library in R. On the x-axis are the annotation values, and on the y-axis are the density values. The area under the density plot gives the probability of observing the annotation values (https://gatkforums.broadinstitute.org/gatk/discussion/6925/understanding-and-adapting-the-generic-hard-filtering-recommendations). 
 
 *SNP and Indel Variant filteration*
