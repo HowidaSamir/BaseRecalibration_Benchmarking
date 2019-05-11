@@ -4,7 +4,6 @@ wget ftp://ftp.ensembl.org/pub/release-96/fasta/homo_sapiens/dna/Homo_sapiens.GR
 
 #Building ref. index
 bowtie2-build ~/BaseRecalibration_Benchmarking/Homo_sapiens.GRCh38.dna.chromosome.21.fa index_two_bowtie2/Homo_sapiens.fa
-
 R1="$HOME/BaseRecalibration_Benchmarking/SRR8115017.fastq.gz”
 RGID=$(cat $R1 | head -n1 | sed 's/:/_/g' |cut -d "." -f1)
 PU=$RGID.$LB
