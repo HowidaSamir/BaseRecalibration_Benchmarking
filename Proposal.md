@@ -45,6 +45,7 @@ Each dataset was aligned to a reference genome by using BWA mem (https://github.
 The following steps were applied on each of the three datasets in parallel 
 
 *Merge replicates*
+
 Merging replicates was done by using the Picard tools were used to merge the replicates.
 The PicardTools are built with java, according to that when running a jar file (e.g., java -jar picard.jar <PicardTool>) a memory limit to java can be added, for example requiring java to use no more than 2GB memory: -Xmx2g. This can help ensure our program does not use more memory than we request (https://informatics.fas.harvard.edu/whole-genome-resquencing-for-population-genomics-fastq-to-vcf.html).
 
