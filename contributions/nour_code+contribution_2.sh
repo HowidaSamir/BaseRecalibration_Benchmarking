@@ -53,3 +53,5 @@ Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
 
 As expected the gvcf file has more variants but it did not proceed till the end due to run out of memory.
 
+writing the script in code.sh file
+
